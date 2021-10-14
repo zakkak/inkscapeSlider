@@ -1,0 +1,71 @@
+= inkscapeSlider
+:icons: font
+
+`inkscapeSlider` is a simple Java program that generates slides by creating separate `svg` files containing different layers from a single _master_ `svg` created with https://inkscape.org/[Inkscape].
+
+== Usage
+
+[source]
+----
+java inkscapeSlider.java <properties file>
+----
+
+The `<properties file>` should include the following entries:
+
+[source]
+----
+baseSvg=test.inkscape.svg
+numberOfSlides=4
+slide1=Base,Slide1
+slide2=Base,Slide2
+slide3=Base,Slide3
+slide4=Base,Slide4
+----
+where:
+
+1. `baseSvg` defines the _master_ svg file to be used.
+2. `numberOfSlides` defines the number of _slides_, i.e. svg files, to be generated.
+3. `slide<n>` defines the names of the layers to be included in the nth slide.
+
+For a quick test you may enter the `example` directory and run `inkscapeSlider` like this:
+
+[source]
+----
+cd example
+java ../inkscapeSlider.java conf.properties
+----
+
+This will produce the following output:
+[EXAMPLE]
+----
+Creating Slide 1
+Removing layer Slide2
+Removing layer Slide3
+Removing layer Slide4
+Writing svg test.inkscape-1.svg
+
+Creating Slide 2
+Removing layer Slide1
+Removing layer Slide3
+Removing layer Slide4
+Writing svg test.inkscape-2.svg
+
+Creating Slide 3
+Removing layer Slide1
+Removing layer Slide2
+Removing layer Slide4
+Writing svg test.inkscape-3.svg
+
+Creating Slide 4
+Removing layer Slide1
+Removing layer Slide2
+Removing layer Slide3
+Writing svg test.inkscape-4.svg
+----
+
+and it will create the following files:
+
+* test.inkscape-1.svg
+* test.inkscape-2.svg
+* test.inkscape-3.svg
+* test.inkscape-4.svg
